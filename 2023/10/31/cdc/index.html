@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   
   
-  <title>cdc | Hexo</title>
+  <title>跨时钟域验证 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="跨时钟域验证为什么需要多个时钟？现代芯片为了满足PPA（Performance,Power,Area），追求最大的性能，更低的功耗和更小的面积。一个简单的办法就是提高时钟频率，但是有三分之一功耗是时钟消耗的。因此，设计者要在功耗和性能两者取得一个折中。解决的方法是让多个不同的时钟处理不同的任务，性能要求高的用快时钟处理，性能要求低的用慢时钟处理。 时钟域时钟域包含时钟和其所控制寄存器以及组合逻辑。">
+  <meta name="description" content="为什么需要多个时钟？现代芯片为了满足PPA（Performance,Power,Area），追求最大的性能，更低的功耗和更小的面积。一个简单的办法就是提高时钟频率，但是有三分之一功耗是时钟消耗的。因此，设计者要在功耗和性能两者取得一个折中。解决的方法是让多个不同的时钟处理不同的任务，性能要求高的用快时钟处理，性能要求低的用慢时钟处理。 时钟域时钟域包含时钟和其所控制寄存器以及组合逻辑。大的设计通常">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cdc">
+<meta property="og:title" content="跨时钟域验证">
 <meta property="og:url" content="http://example.com/2023/10/31/cdc/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="跨时钟域验证为什么需要多个时钟？现代芯片为了满足PPA（Performance,Power,Area），追求最大的性能，更低的功耗和更小的面积。一个简单的办法就是提高时钟频率，但是有三分之一功耗是时钟消耗的。因此，设计者要在功耗和性能两者取得一个折中。解决的方法是让多个不同的时钟处理不同的任务，性能要求高的用快时钟处理，性能要求低的用慢时钟处理。 时钟域时钟域包含时钟和其所控制寄存器以及组合逻辑。">
+<meta property="og:description" content="为什么需要多个时钟？现代芯片为了满足PPA（Performance,Power,Area），追求最大的性能，更低的功耗和更小的面积。一个简单的办法就是提高时钟频率，但是有三分之一功耗是时钟消耗的。因此，设计者要在功耗和性能两者取得一个折中。解决的方法是让多个不同的时钟处理不同的任务，性能要求高的用快时钟处理，性能要求低的用慢时钟处理。 时钟域时钟域包含时钟和其所控制寄存器以及组合逻辑。大的设计通常">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2023/10/31/cdc/figure1.png">
 <meta property="og:image" content="http://example.com/2023/10/31/cdc/figure2.png">
@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://example.com/2023/10/31/cdc/figure6.png">
 <meta property="og:image" content="http://example.com/2023/10/31/cdc/figure7.png">
 <meta property="article:published_time" content="2023-10-31T02:08:37.000Z">
-<meta property="article:modified_time" content="2023-10-31T02:50:20.309Z">
+<meta property="article:modified_time" content="2023-10-31T05:50:22.478Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2023/10/31/cdc/figure1.png">
@@ -97,7 +97,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      cdc
+      跨时钟域验证
     </h1>
   
 
@@ -105,7 +105,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="跨时钟域验证"><a href="#跨时钟域验证" class="headerlink" title="跨时钟域验证"></a>跨时钟域验证</h1><h2 id="为什么需要多个时钟？"><a href="#为什么需要多个时钟？" class="headerlink" title="为什么需要多个时钟？"></a>为什么需要多个时钟？</h2><p>现代芯片为了满足PPA（Performance,Power,Area），追求最大的性能，更低的功耗和更小的面积。一个简单的办法就是提高时钟频率，但是有三分之一功耗是时钟消耗的。因此，设计者要在功耗和性能两者取得一个折中。解决的方法是让多个不同的时钟处理不同的任务，性能要求高的用快时钟处理，性能要求低的用慢时钟处理。</p>
+        <h2 id="为什么需要多个时钟？"><a href="#为什么需要多个时钟？" class="headerlink" title="为什么需要多个时钟？"></a>为什么需要多个时钟？</h2><p>现代芯片为了满足PPA（Performance,Power,Area），追求最大的性能，更低的功耗和更小的面积。一个简单的办法就是提高时钟频率，但是有三分之一功耗是时钟消耗的。因此，设计者要在功耗和性能两者取得一个折中。解决的方法是让多个不同的时钟处理不同的任务，性能要求高的用快时钟处理，性能要求低的用慢时钟处理。</p>
 <h2 id="时钟域"><a href="#时钟域" class="headerlink" title="时钟域"></a>时钟域</h2><p>时钟域包含时钟和其所控制寄存器以及组合逻辑。大的设计通常会有数十个时钟域。这些时钟域之间的互连关系就构成了跨时钟域（CDC,clock domain crossings）。如图1所示是一个简单的CDC。<br><img src="/2023/10/31/cdc/figure1.png" alt="avatar"></p>
 <h2 id="多时钟域带来什么问题？"><a href="#多时钟域带来什么问题？" class="headerlink" title="多时钟域带来什么问题？"></a>多时钟域带来什么问题？</h2><h3 id="亚稳态（Metastability）"><a href="#亚稳态（Metastability）" class="headerlink" title="亚稳态（Metastability）"></a>亚稳态（Metastability）</h3><h4 id="亚稳态及其成因"><a href="#亚稳态及其成因" class="headerlink" title="亚稳态及其成因"></a>亚稳态及其成因</h4><p><img src="/2023/10/31/cdc/figure2.png" alt="avatar"></p>
 <h4 id="亚稳态解决方法"><a href="#亚稳态解决方法" class="headerlink" title="亚稳态解决方法"></a>亚稳态解决方法</h4><p>多位同步器<br><img src="/2023/10/31/cdc/figure3.png" alt="avatar"></p>
@@ -118,7 +118,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/31/cdc/" data-id="clodw93ux0000o4ttff5j16x0" data-title="cdc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/10/31/cdc/" data-id="clodwu2h500006stt20018my8" data-title="跨时钟域验证" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -128,11 +128,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2023/10/31/cpp-multi-thread/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2023/10/31/cpp11-feature/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          cpp_multi_thread
+          C++11新特性
         
       </div>
     </a>
@@ -173,11 +173,11 @@
       <ul>
         
           <li>
-            <a href="/2023/10/31/cpp-multi-thread/">cpp_multi_thread</a>
+            <a href="/2023/10/31/cpp11-feature/">C++11新特性</a>
           </li>
         
           <li>
-            <a href="/2023/10/31/cdc/">cdc</a>
+            <a href="/2023/10/31/cdc/">跨时钟域验证</a>
           </li>
         
       </ul>

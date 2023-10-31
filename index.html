@@ -73,6 +73,107 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-cpp-multi-thread" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/31/cpp-multi-thread/" class="article-date">
+  <time class="dt-published" datetime="2023-10-31T05:48:37.000Z" itemprop="datePublished">2023-10-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/10/31/cpp-multi-thread/">C++多线程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="线程和进程的区别"><a href="#线程和进程的区别" class="headerlink" title="线程和进程的区别"></a>线程和进程的区别</h2><p>查看操作系统课程。</p>
+<h2 id="C-11中新增加的多线程特性"><a href="#C-11中新增加的多线程特性" class="headerlink" title="C++11中新增加的多线程特性"></a>C++11中新增加的多线程特性</h2><ul>
+<li><p>4种锁</p>
+<ul>
+<li>mutex互斥锁<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>lock()</td>
+<td>上锁</td>
+</tr>
+<tr>
+<td>unlock()</td>
+<td>解锁</td>
+</tr>
+<tr>
+<td>try_lock()</td>
+<td>非阻塞获取锁</td>
+</tr>
+<tr>
+<td>线程函数调用lock()的时候，有三种情况：</td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>锁没有被取走，直接获取锁。</li>
+<li>当前线程已经有该锁了，形成死锁。</li>
+<li>锁被其他线程取走，进行阻塞等待。<br>函数调用try_lock的时候，有以下三种情况：</li>
+<li>锁没有被取走，直接获取锁。</li>
+<li>该线程已经有锁了，产生死锁。</li>
+<li>锁被其他线程取走，会返回false，而不是被阻塞。</li>
+</ul>
+</li>
+<li>recursive_mutex<br>允许递归上锁，来获得互斥对象的多层所有权，在释放互斥量的时候也需要采用等量的unlock来进行解锁。</li>
+<li>time_mutex<br>比mutex多了两个成员函数。<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>try_lock_for()</td>
+<td>接受一个时间范围，表示在一段时间范围之内，线程如果没有获得锁则被阻塞住，如果此期间其他线程释放了锁，则该线程可以获得锁，如果超时，返回false</td>
+</tr>
+<tr>
+<td>try_lock_util()</td>
+<td>接受一个时间点作为参数，在指定时间未到来之前，线程如果没有获得锁则被阻塞住，如果此期间其他线程释放了锁，则该线程可以获得锁，如果超时返回false</td>
+</tr>
+</tbody></table>
+</li>
+<li>recurive_timed_mutex<br>较少使用。</li>
+</ul>
+</li>
+<li><p>lock_guard<br>lock_guard是C++11中定义的模板类。主要通过RAII的方式，对其管理的互斥量进行了封装，在需要加锁的地方，只需要用上述介绍的任意互斥体实例化一个lock_guard，调用构造函数成功上锁，出作用域前，lock_guard对象要被销毁，调用析构函数自动解锁，可以有效避免死锁的问题。缺陷：太单一，用户没有办法对锁进行控制，因此C++11又提供了unique_lock。</p>
+</li>
+<li><p>unique_lock<br>与lock_gard类似，unique_lock类模板也是采用RAII的方式对锁进行了封装，并且也是独占所有权的方式管理mutex对象的上锁和解锁操作，即其对象之间不能发生拷贝。在构造时，unique_lock对象需要传入一个Mutex对象作为它的参数，新创建的unique_lock对象负责传入的Mutex对象的上锁和解锁的操作。使用以上类型互斥量实例化unique_lock对象的时候，自动调用构造函数上锁，unique_lock对象销毁时自动调用析构函数解锁，可以方便的防止死锁问题。与lock_guard不同的是，unique_lock更加的灵活，提供了很多成员函数。</p>
+</li>
+</ul>
+<h2 id="锁和同步机制"><a href="#锁和同步机制" class="headerlink" title="锁和同步机制"></a>锁和同步机制</h2><h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><h2 id="并行算法和数据结构"><a href="#并行算法和数据结构" class="headerlink" title="并行算法和数据结构"></a>并行算法和数据结构</h2><h2 id="OpenMP-MPI"><a href="#OpenMP-MPI" class="headerlink" title="OpenMP&#x2F;MPI"></a>OpenMP&#x2F;MPI</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/10/31/cpp-multi-thread/" data-id="clodwy36w0001ogtt8rwrcggq" data-title="C++多线程" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-cpp11-feature" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/10/31/cpp11-feature/" class="article-date">
@@ -100,7 +201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/31/cpp11-feature/" data-id="clodwu2hb00016sttc5wvcs0p" data-title="C++11新特性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/10/31/cpp11-feature/" data-id="clodwy36y0002ogtt3y389trs" data-title="C++11新特性" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -147,7 +248,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/31/cdc/" data-id="clodwu2h500006stt20018my8" data-title="跨时钟域验证" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/10/31/cdc/" data-id="clodwy36s0000ogttg6zaekri" data-title="跨时钟域验证" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -188,6 +289,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2023/10/31/cpp-multi-thread/">C++多线程</a>
+          </li>
         
           <li>
             <a href="/2023/10/31/cpp11-feature/">C++11新特性</a>

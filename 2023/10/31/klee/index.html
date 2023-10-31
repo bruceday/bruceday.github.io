@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>基础算法 | Hexo</title>
+  <title>符号执行工具KLEE剖析 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="基础算法五个基本的算法思想：分治法、贪心法、动态规划、回溯和分支限界。 分治法贪心法动态规划回溯分支限界">
+  <meta name="description" content="KLEE1是著名的基于LLVM的符号执行工具，由Cadar等开发，相应的论文发于OSDI会议，并获得当年的最佳论文。  [1] Cadar C , Dunbar D , Engler D R .KLEE: Unassisted and Automatic Generation of High-Coverage Tests for Complex Systems Programs[C]&#x2F;&#x2F;Useni">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基础算法">
-<meta property="og:url" content="http://example.com/2023/10/31/acm/index.html">
+<meta property="og:title" content="符号执行工具KLEE剖析">
+<meta property="og:url" content="http://example.com/2023/10/31/klee/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="基础算法五个基本的算法思想：分治法、贪心法、动态规划、回溯和分支限界。 分治法贪心法动态规划回溯分支限界">
+<meta property="og:description" content="KLEE1是著名的基于LLVM的符号执行工具，由Cadar等开发，相应的论文发于OSDI会议，并获得当年的最佳论文。  [1] Cadar C , Dunbar D , Engler D R .KLEE: Unassisted and Automatic Generation of High-Coverage Tests for Complex Systems Programs[C]&#x2F;&#x2F;Useni">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-10-31T06:23:18.000Z">
-<meta property="article:modified_time" content="2023-10-31T06:29:29.943Z">
+<meta property="article:published_time" content="2023-10-31T06:36:04.000Z">
+<meta property="article:modified_time" content="2023-10-31T06:49:17.277Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -75,10 +75,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-acm" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-klee" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/10/31/acm/" class="article-date">
-  <time class="dt-published" datetime="2023-10-31T06:23:18.000Z" itemprop="datePublished">2023-10-31</time>
+    <a href="/2023/10/31/klee/" class="article-date">
+  <time class="dt-published" datetime="2023-10-31T06:36:04.000Z" itemprop="datePublished">2023-10-31</time>
 </a>
     
   </div>
@@ -89,7 +89,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      基础算法
+      符号执行工具KLEE剖析
     </h1>
   
 
@@ -97,12 +97,14 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="基础算法"><a href="#基础算法" class="headerlink" title="基础算法"></a>基础算法</h1><p>五个基本的算法思想：分治法、贪心法、动态规划、回溯和分支限界。</p>
-<h2 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h2><h2 id="贪心法"><a href="#贪心法" class="headerlink" title="贪心法"></a>贪心法</h2><h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h2 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h2><h2 id="分支限界"><a href="#分支限界" class="headerlink" title="分支限界"></a>分支限界</h2>
+        <p>KLEE<a href="#refer-anchor-1"><sup>1</sup></a>是著名的基于LLVM的符号执行工具，由Cadar等开发，相应的论文发于OSDI会议，并获得当年的最佳论文。</p>
+<div id="refer-anchor-1"></div>
+[1] Cadar C , Dunbar D , Engler D R .KLEE: Unassisted and Automatic Generation of High-Coverage Tests for Complex Systems Programs[C]//Usenix Conference on Operating Systems Design & Implementation.USENIX Association, 2009.DOI:10.1109/ROBIO.2013.6739715.
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/31/acm/" data-id="clodyxvme00027sttdza4c4dd" data-title="基础算法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/10/31/klee/" data-id="clodyxvmi00067sttfplcc8wp" data-title="符号执行工具KLEE剖析" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -112,19 +114,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2023/10/31/symbolic-execution/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          符号执行
-        
-      </div>
-    </a>
   
-  
-    <a href="/2023/10/31/cpp-multi-thread/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2023/10/31/hardware-model-checking/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">C++多线程</div>
+      <div class="article-nav-title">硬件模型检验</div>
     </a>
   
 </nav>

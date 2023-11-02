@@ -104,16 +104,23 @@
 <h3 id="总线不一致（Bus-Incoherency）"><a href="#总线不一致（Bus-Incoherency）" class="headerlink" title="总线不一致（Bus Incoherency）"></a>总线不一致（Bus Incoherency）</h3><h4 id="成因"><a href="#成因" class="headerlink" title="成因"></a>成因</h4><p><img src="/2023/10/31/cdc/figure5.png" alt="avatar"></p>
 <h4 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a>解决办法</h4><h3 id="数据丢失（Data-Loss）"><a href="#数据丢失（Data-Loss）" class="headerlink" title="数据丢失（Data Loss）"></a>数据丢失（Data Loss）</h3><h4 id="成因-1"><a href="#成因-1" class="headerlink" title="成因"></a>成因</h4><h4 id="解决办法-2"><a href="#解决办法-2" class="headerlink" title="解决办法"></a>解决办法</h4><p>握手协议<br><img src="/2023/10/31/cdc/figure6.png" alt="avatar"></p>
 <p>FIFO<br><img src="/2023/10/31/cdc/figure7.png" alt="avatar"></p>
+<h2 id="CDC-verification-methodology"><a href="#CDC-verification-methodology" class="headerlink" title="CDC verification methodology"></a>CDC verification methodology</h2><p><img src="/2023/10/31/cdc/figure9.png" alt="avatar"></p>
 <h2 id="时钟网络的识别"><a href="#时钟网络的识别" class="headerlink" title="时钟网络的识别"></a>时钟网络的识别</h2><p>为了验证时钟结构，需要确定时钟信号和时钟信号衍生的时钟信号。然而，由于存在控制循环和时序转换使得找到时钟网络的边界是不寻常的。Hwever, a clock network includes sequential transformations, and control loops, which makes its boundaries not trivial to ﬁnd. For instance, structurally, there is no way to diﬀerentiate a conﬁguration register from a register which is part of the shaping logic (the cloud in Figure 3.1). Thus, the derived clocks cannot be restricted to the clock pins of the registers, and the conﬁguration signals cannot be restricted to the primary inputs. <u>The identiﬁcation of the clock paths and the control paths need to rely on heuristics.</u></p>
 <p><img src="/2023/10/31/cdc/figure8.png" alt="avatar"></p>
 <h3 id="Clock-Propagation"><a href="#Clock-Propagation" class="headerlink" title="Clock Propagation"></a>Clock Propagation</h3><p>时钟传播问题比较难。</p>
 <h3 id="Conﬁguration-Signals"><a href="#Conﬁguration-Signals" class="headerlink" title="Conﬁguration Signals"></a>Conﬁguration Signals</h3><p>Conﬁguration signals are identiﬁed as the inputs to the clock network which are not on the clock path. A ﬁrst approximation would be to consider them as:</p>
-<h3 id><a href="#" class="headerlink" title></a></h3><h2 id="结构分析"><a href="#结构分析" class="headerlink" title="结构分析"></a>结构分析</h2><h2 id="功能验证"><a href="#功能验证" class="headerlink" title="功能验证"></a>功能验证</h2><p>CDC涉及的主要的安全性验证，安全性验证本质上为状态机的可达性问题。</p>
-<h3 id="通过模型检验验证安全性"><a href="#通过模型检验验证安全性" class="headerlink" title="通过模型检验验证安全性"></a>通过模型检验验证安全性</h3><h4 id="电路模型转化为Moore自动机"><a href="#电路模型转化为Moore自动机" class="headerlink" title="电路模型转化为Moore自动机"></a>电路模型转化为Moore自动机</h4><h4 id="-1"><a href="#-1" class="headerlink" title></a></h4>
+<h3 id><a href="#" class="headerlink" title></a></h3><h2 id="结构分析"><a href="#结构分析" class="headerlink" title="结构分析"></a>结构分析</h2><h3 id="Identiﬁcation-of-the-Clock-Network"><a href="#Identiﬁcation-of-the-Clock-Network" class="headerlink" title="Identiﬁcation of the Clock Network"></a>Identiﬁcation of the Clock Network</h3><p>技术难点为Clock Propagation、循环结构、衍生时钟和Conﬁguration Signals。</p>
+<h3 id="Liveness-Property"><a href="#Liveness-Property" class="headerlink" title="Liveness Property"></a>Liveness Property</h3><h3 id="Parametric-Analysis"><a href="#Parametric-Analysis" class="headerlink" title="Parametric Analysis"></a>Parametric Analysis</h3><h3 id="同步结构的分析"><a href="#同步结构的分析" class="headerlink" title="同步结构的分析"></a>同步结构的分析</h3><p>模式识别算法</p>
+<h2 id="功能验证"><a href="#功能验证" class="headerlink" title="功能验证"></a>功能验证</h2><p>CDC涉及的主要的安全性验证，安全性验证本质上为状态机的可达性问题。</p>
+<h3 id="模型生成"><a href="#模型生成" class="headerlink" title="模型生成"></a>模型生成</h3><p>这是一个难点。</p>
+<h4 id="硬件模型"><a href="#硬件模型" class="headerlink" title="硬件模型"></a>硬件模型</h4><p>为了建立硬件的模型，有两种方式，一种是结构模型，一种是功能模型。结构模型用vertex-labeled directed graph表示，功能模型用moore machine表示。</p>
+<h5 id="握手协议的一个例子"><a href="#握手协议的一个例子" class="headerlink" title="握手协议的一个例子"></a>握手协议的一个例子</h5><p>如图所示为握手协议的波形、握手协议的网表、对应的协议状态转换图和结构图。<br><img src="/2023/10/31/cdc/figure10.png" alt="avatar"><br><img src="/2023/10/31/cdc/figure11.png" alt="avatar"><br><img src="/2023/10/31/cdc/figure12.png" alt="avatar"><br><img src="/2023/10/31/cdc/figure13.png" alt="avatar"></p>
+<h4 id="Justiﬁcation"><a href="#Justiﬁcation" class="headerlink" title="Justiﬁcation"></a>Justiﬁcation</h4><p>参见论文关于CEX的处理。<br>Brayton, Alan Mishchenko Niklas Een Robert. “A Toolbox for Counter-Example Analysis and Optimization.”</p>
+<h4 id="-1"><a href="#-1" class="headerlink" title></a></h4>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/31/cdc/" data-id="cloe6q8h600032ktt11xb8a0j" data-title="跨时钟域验证" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/10/31/cdc/" data-id="cloggjaot000288ttfaf0h1nu" data-title="跨时钟域验证" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

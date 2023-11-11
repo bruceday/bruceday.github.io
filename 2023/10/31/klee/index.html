@@ -6,15 +6,15 @@
   
   <title>符号执行工具KLEE剖析 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="KLEE1是著名的基于LLVM的符号执行工具，由Cadar等开发，相应的论文发于OSDI会议，并获得当年的最佳论文。  [1] Cadar C , Dunbar D , Engler D R .KLEE: Unassisted and Automatic Generation of High-Coverage Tests for Complex Systems Programs[C]&#x2F;&#x2F;Useni">
+  <meta name="description" content="KLEE1是著名的基于LLVM的符号执行工具，由Cadar等开发，相应的论文发于OSDI会议，并获得当年的最佳论文。 基本数据结构ExecutionStateExecutionState表示符号执行的状态,状态是符号执行的基本单位。指令的执行使得相应的状态变化，在分支条件下，会根据不同分支fork出不同的状态。    字段 类型 描述    pc KInstIterator 下一条执行指令的指针">
 <meta property="og:type" content="article">
 <meta property="og:title" content="符号执行工具KLEE剖析">
 <meta property="og:url" content="http://example.com/2023/10/31/klee/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="KLEE1是著名的基于LLVM的符号执行工具，由Cadar等开发，相应的论文发于OSDI会议，并获得当年的最佳论文。  [1] Cadar C , Dunbar D , Engler D R .KLEE: Unassisted and Automatic Generation of High-Coverage Tests for Complex Systems Programs[C]&#x2F;&#x2F;Useni">
+<meta property="og:description" content="KLEE1是著名的基于LLVM的符号执行工具，由Cadar等开发，相应的论文发于OSDI会议，并获得当年的最佳论文。 基本数据结构ExecutionStateExecutionState表示符号执行的状态,状态是符号执行的基本单位。指令的执行使得相应的状态变化，在分支条件下，会根据不同分支fork出不同的状态。    字段 类型 描述    pc KInstIterator 下一条执行指令的指针">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-31T06:36:04.000Z">
-<meta property="article:modified_time" content="2023-10-31T06:49:17.277Z">
+<meta property="article:modified_time" content="2023-11-03T18:17:04.607Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -98,13 +98,91 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <p>KLEE<a href="#refer-anchor-1"><sup>1</sup></a>是著名的基于LLVM的符号执行工具，由Cadar等开发，相应的论文发于OSDI会议，并获得当年的最佳论文。</p>
+<h1 id="基本数据结构"><a href="#基本数据结构" class="headerlink" title="基本数据结构"></a>基本数据结构</h1><h2 id="ExecutionState"><a href="#ExecutionState" class="headerlink" title="ExecutionState"></a>ExecutionState</h2><p>ExecutionState表示符号执行的状态,状态是符号执行的基本单位。指令的执行使得相应的状态变化，在分支条件下，会根据不同分支fork出不同的状态。</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pc</td>
+<td>KInstIterator</td>
+<td>下一条执行指令的指针</td>
+</tr>
+<tr>
+<td>prevPC</td>
+<td>KInstIterator</td>
+<td>当前执行指令的指针</td>
+</tr>
+<tr>
+<td>stack</td>
+<td>stack_ty</td>
+<td>当前的指令流</td>
+</tr>
+<tr>
+<td>addressSpace</td>
+<td>AddressSpace</td>
+<td>地址空间</td>
+</tr>
+<tr>
+<td>constraints</td>
+<td>ConstraintSet</td>
+<td>执行到当前状态，已经搜集到的约束的集合</td>
+</tr>
+<tr>
+<td>ptreeNode</td>
+<td>PTreeNode*</td>
+<td>符号执行树</td>
+</tr>
+<tr>
+<td>nextID</td>
+<td>uint32_t</td>
+<td>全局状态统计数</td>
+</tr>
+<tr>
+<td>id</td>
+<td>uint32_t</td>
+<td>当前状态id</td>
+</tr>
+</tbody></table>
+<h2 id="AddressSpace"><a href="#AddressSpace" class="headerlink" title="AddressSpace"></a>AddressSpace</h2><p>AddressSpace表示地址空间，地址空间有&lt;MemoryObject,ObjectState&gt;的map结构组成。</p>
+<h2 id="MemoryObject"><a href="#MemoryObject" class="headerlink" title="MemoryObject"></a>MemoryObject</h2><p>MemoryObject表示一个符号内存对象，其成员变量中：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>address</td>
+<td>uint64_t</td>
+<td>为该内存对象的首地址</td>
+</tr>
+<tr>
+<td>size</td>
+<td>unsigned</td>
+<td>为内存对象的大小</td>
+</tr>
+<tr>
+<td>allocSite</td>
+<td>llvm::Value *</td>
+<td>为分配该内存对象的指令。(alloca指令)</td>
+</tr>
+</tbody></table>
+<h2 id="ObjectState"><a href="#ObjectState" class="headerlink" title="ObjectState"></a>ObjectState</h2><p>ObjectState类记录了一个内存对象的状态，包括每个byte对应的状态，已经该内存对象是否只读标识readOnly。</p>
+<h2 id="StackFrame"><a href="#StackFrame" class="headerlink" title="StackFrame"></a>StackFrame</h2><p>表示函数调用栈帧。</p>
 <div id="refer-anchor-1"></div>
 [1] Cadar C , Dunbar D , Engler D R .KLEE: Unassisted and Automatic Generation of High-Coverage Tests for Complex Systems Programs[C]//Usenix Conference on Operating Systems Design & Implementation.USENIX Association, 2009.DOI:10.1109/ROBIO.2013.6739715.
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/31/klee/" data-id="cloggjap7000988tt4wtr6ofl" data-title="符号执行工具KLEE剖析" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/10/31/klee/" data-id="clotmc70r000a3gttd30mcgq8" data-title="符号执行工具KLEE剖析" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -151,7 +229,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a></li></ul>
     </div>
   </div>
 
@@ -164,23 +242,23 @@
       <ul>
         
           <li>
-            <a href="/2023/10/31/eco/">eco</a>
+            <a href="/2023/11/05/cpp-basic/">C++基础知识</a>
           </li>
         
           <li>
-            <a href="/2023/10/31/design-pattern/">设计模式</a>
+            <a href="/2023/11/05/graph-isomorphism/">图同构算法</a>
           </li>
         
           <li>
-            <a href="/2023/10/31/coq/">coq</a>
+            <a href="/2023/11/05/kmp/">kmp</a>
           </li>
         
           <li>
-            <a href="/2023/10/31/klee/">符号执行工具KLEE剖析</a>
+            <a href="/2023/11/04/A-Memory-Model-for-Static-Analysis-of-C/">A Memory Model for Static Analysis of C</a>
           </li>
         
           <li>
-            <a href="/2023/10/31/hardware-model-checking/">硬件模型检验</a>
+            <a href="/2023/11/02/leetcode/">leetcode题解</a>
           </li>
         
       </ul>

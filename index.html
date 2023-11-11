@@ -73,6 +73,219 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-cpp-basic" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/11/05/cpp-basic/" class="article-date">
+  <time class="dt-published" datetime="2023-11-05T15:03:30.000Z" itemprop="datePublished">2023-11-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/11/05/cpp-basic/">C++基础知识</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="多态的实现机制"><a href="#多态的实现机制" class="headerlink" title="多态的实现机制"></a>多态的实现机制</h1><p>通过虚函数表实现。</p>
+<h2 id="完全不用虚函数"><a href="#完全不用虚函数" class="headerlink" title="完全不用虚函数"></a>完全不用虚函数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Show</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Child1</span>:<span class="keyword">public</span> Base&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Show</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/11/05/cpp-basic/" data-id="clotmc70m00023gttc7vt7j20" data-title="C++基础知识" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-graph-isomorphism" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/11/05/graph-isomorphism/" class="article-date">
+  <time class="dt-published" datetime="2023-11-05T13:39:08.000Z" itemprop="datePublished">2023-11-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/11/05/graph-isomorphism/">图同构算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="五种图同构算法"><a href="#五种图同构算法" class="headerlink" title="五种图同构算法"></a>五种图同构算法</h1><h2 id="Ullmann"><a href="#Ullmann" class="headerlink" title="Ullmann"></a>Ullmann</h2><h2 id="VF"><a href="#VF" class="headerlink" title="VF"></a>VF</h2><h2 id="VF2"><a href="#VF2" class="headerlink" title="VF2"></a>VF2</h2><p>VF2算法是一种图同构匹配算法，用于判断两个有标号无向图之间是否存在同构关系。<br>VF2算法基于状态空间搜索的思想，将图同构匹配问题转化为状态空间中的状态搜索问题。在匹配过程中，VF2算法维护了当前状态下的图匹配情况以及两个图节点间的匹配关系，不断尝试新的节点匹配，直到找到一组合法的节点匹配或者搜索完所有状态。<br>VF2算法核心是根据节点间的相似性不断剪枝，减少搜索的时间和空间开销。在匹配节点时，VF2算法利用图节点的标签、邻接性等信息计算节点相似度，从而优先考虑相似度高的节点匹配。同时，VF2算法还通过子图同构判定和集成剪枝等技巧进一步提高匹配效率。<br>VF2算法通过判断两个图的节点相似度来确定它们之间是否存在子图同构关系。<br>算法实现子图同构的步骤如下：<br>1.首先对输入的两个图G1和G2进行预处理。将他们转化为内部数据结构，包括节点列表、邻接表和节点属性。<br>2.然后从G1的第一个节点开始遍历，对于每个节点，尝试把它与G2中的某个节点匹配。如果匹配成功，则继续匹配下一个节点；如果匹配失败，则回溯到上一个节点继续进行匹配。匹配过程中，VF2算法会根据一些启发式规则来优化匹配效率。<br>3.在节点匹配过程中VF2算法会利用节点标签和邻接性来计算节点相似度，即两个节点的相似度越高，则它们越有可能匹配成功。具体地，节点相似度计算方式如下：<br> a. 如果两个节点的标签不同，则它们的相似度为0；<br> b. 如果两个节点的标签相同，但它们的邻接性不同，则相似度为1；<br> c. 如果两个节点的标签和邻接性都相同，则相似度为2。<br>4.VF2算法还利用一些策略来剪枝搜索空间。例如，当某个节点在G1中有没有匹配成功的邻接节点时，可以直接跳过这个节点或者回溯到上一个节点。<br>5.最后，如果G1全部节点都匹配成功，则G1和G2存在子图同构关系；否则不存在。<br>VF2算法利用节点相似度判断两个图直接是否存在子图同构关系，并通过启发式规则和剪枝策略来提高匹配效率。<br>在实际应用中，VF2算法被广泛应用于图像处理、计算机视觉、机器学习等领域，比如语义分割、目标检测、物体识别等任务中的相似性匹配问题。</p>
+<h2 id="SD"><a href="#SD" class="headerlink" title="SD"></a>SD</h2><h2 id="Nauty"><a href="#Nauty" class="headerlink" title="Nauty"></a>Nauty</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/11/05/graph-isomorphism/" data-id="clotmc70q00093gttg9e52goz" data-title="图同构算法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-kmp" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/11/05/kmp/" class="article-date">
+  <time class="dt-published" datetime="2023-11-05T02:12:30.000Z" itemprop="datePublished">2023-11-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/11/05/kmp/">kmp</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="KMP算法详解"><a href="#KMP算法详解" class="headerlink" title="KMP算法详解"></a>KMP算法详解</h1><p>KMP用来解决字符串匹配问题：给定一个字符串str，给定匹配字符串p_str，限定p_str的长度小于等于str的长度。如果p_str为str的子串，则输出首次匹配首字母的索引，如果不存在，则输出-1。可参见Leetcode28题。</p>
+<h2 id="暴力枚举"><a href="#暴力枚举" class="headerlink" title="暴力枚举"></a>暴力枚举</h2><p>时间复杂度为O(MN)，空间复杂度为O(1)，M为模式字符串p_str长度，N为文本字符串str长度。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">pattern_string</span><span class="params">(<span class="type">const</span> std::string&amp; str,<span class="type">const</span> std::string&amp; p_str)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> pattern_index=<span class="number">-1</span>;</span><br><span class="line">    <span class="type">int</span> str_length=str.<span class="built_in">size</span>();</span><br><span class="line">    <span class="type">int</span> p_str_length=p_str.<span class="built_in">size</span>();</span><br><span class="line">    <span class="type">int</span> pattern_count;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;str_length-p_str_length+<span class="number">1</span>;i++)&#123;</span><br><span class="line">        pattern_count=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> k=i,j=<span class="number">0</span>;j&lt;p_str_length;j++,k++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(str[k]==p_str[j])&#123;</span><br><span class="line">                pattern_count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pattern_count==p_str_length)&#123;</span><br><span class="line">            pattern_index=i;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pattern_index;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h2><p>时间复杂度为O(M+N)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/11/05/kmp/" data-id="clotmc70v000d3gttb70b7dfy" data-title="kmp" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-A-Memory-Model-for-Static-Analysis-of-C" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/11/04/A-Memory-Model-for-Static-Analysis-of-C/" class="article-date">
+  <time class="dt-published" datetime="2023-11-04T09:00:06.000Z" itemprop="datePublished">2023-11-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/11/04/A-Memory-Model-for-Static-Analysis-of-C/">A Memory Model for Static Analysis of C</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h1><h2 id="Name-Binding-Model"><a href="#Name-Binding-Model" class="headerlink" title="Name-Binding Model"></a>Name-Binding Model</h2><p>该模型将名字放等号左边，值放等号右边。该内存模型的缺点无法描述所有的C的的语义,考虑如下代码1：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x,y;</span><br><span class="line"><span class="type">int</span> *p=&amp;x;</span><br><span class="line">x=<span class="number">3</span>;</span><br><span class="line">*p=<span class="number">4</span>;</span><br><span class="line">y=x;</span><br></pre></td></tr></table></figure>
+<p>*p和x都是别名,虽然&amp;x在右边，也不能当作值。</p>
+<h2 id="Array-Simulation-Model"><a href="#Array-Simulation-Model" class="headerlink" title="Array Simulation Model"></a>Array Simulation Model</h2><p>这种内存模型直接将内存建模成大的一维数组，如果将所有变量分配到数组中，数组的索引代表内存的位置。这种模型足够精准，代码1可用数组模型表示如下代码2：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Assume mem[] is the memory simulation <span class="built_in">array</span></span><br><span class="line">Memory allocation:</span><br><span class="line">    x: mem[<span class="number">1</span>], y: mem[<span class="number">2</span>], p: mem[<span class="number">3</span>]</span><br><span class="line">    mem[<span class="number">3</span>] = <span class="number">1</span>; <span class="comment">// p = &amp;x; mem[3] is &#x27;p&#x27;,</span></span><br><span class="line">                <span class="comment">// 1 is x&#x27;s simulation location.</span></span><br><span class="line">    mem[<span class="number">1</span>] = <span class="number">3</span>; <span class="comment">// x = 3;</span></span><br><span class="line">    mem[mem[<span class="number">3</span>]] = <span class="number">4</span>; <span class="comment">// dereference &#x27;*&#x27; means </span></span><br><span class="line">                     <span class="comment">// we have to nest mem[]&#x27;s</span></span><br><span class="line">    memp[<span class="number">2</span>]=mem[<span class="number">1</span>];  <span class="comment">// y = x;</span></span><br></pre></td></tr></table></figure>
+<p>这种模型的缺点是需要实现直到每个变量的内存大小，如果有堆内存或者其他在运行时才知道的内存大小，该模型不太适用。一维数组模型的改进是多维数组，每一个MemoryObject关联一个一维数组，其缺点如示例代码3:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span>&#123;</span><span class="type">int</span> d&#125; sa[<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<p>该结构体数组用多维数组表示会丢失MemoryObject的层次关系。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/11/04/A-Memory-Model-for-Static-Analysis-of-C/" data-id="clotmc70f00003gtt9ifa3atk" data-title="A Memory Model for Static Analysis of C" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-leetcode" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/11/02/leetcode/" class="article-date">
+  <time class="dt-published" datetime="2023-11-02T11:01:45.000Z" itemprop="datePublished">2023-11-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/11/02/leetcode/">leetcode题解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="滑动窗口解题"><a href="#滑动窗口解题" class="headerlink" title="滑动窗口解题"></a>滑动窗口解题</h1><h2 id="适用情形"><a href="#适用情形" class="headerlink" title="适用情形"></a>适用情形</h2><p>滑动窗口的核心在于连续！如果需要得到的结果是满足某种较为明显条件的连续的子数组，可以考虑使用滑动窗口来做。滑动窗口算法是较为入门题目的经典算法之一，一般是一些有规律数组问题的最优解，如果一个数组的问题可以用动态规划解，但又可以使用滑动窗口解决，那么往往滑动窗口的效率更高。</p>
+<h2 id="基本步骤"><a href="#基本步骤" class="headerlink" title="基本步骤"></a>基本步骤</h2><ul>
+<li>初始化窗口<br>初始化左右边界left&#x3D;right&#x3D;0,把索引闭区间[left,right]称为一个窗口。</li>
+<li>寻找可行解<br>先不断的增加right指针扩大窗口[left,right],直到窗口中的满足可行解。</li>
+<li>优化可行解<br>当得到可行解后，停止增加right,转而不断增加left指针缩小[left,right],直到窗口中的可行解不再符合要求。同时，每次增加left，都要更新一轮结果。</li>
+<li>滑动窗口，直至一次遍历结束。<br>重复第2和第3步，直到right到达的尽头。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/11/02/leetcode/" data-id="clotmc70v000e3gtt7dc329lg" data-title="leetcode题解" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-eco" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/10/31/eco/" class="article-date">
@@ -99,7 +312,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/31/eco/" data-id="cloggjap5000888tt3evah35z" data-title="eco" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/10/31/eco/" data-id="clotmc70s000b3gtt0is77xq0" data-title="eco" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -138,7 +351,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/31/design-pattern/" data-id="cloggjaow000388tt93qmcel4" data-title="设计模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/10/31/design-pattern/" data-id="clotmc70p00083gttdslb6lgj" data-title="设计模式" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -176,7 +389,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/31/coq/" data-id="cloggjaor000188tt1rtd7nwo" data-title="coq" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/10/31/coq/" data-id="clotmc70n00043gttfkx9a4aq" data-title="coq" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -211,13 +424,91 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <p>KLEE<a href="#refer-anchor-1"><sup>1</sup></a>是著名的基于LLVM的符号执行工具，由Cadar等开发，相应的论文发于OSDI会议，并获得当年的最佳论文。</p>
+<h1 id="基本数据结构"><a href="#基本数据结构" class="headerlink" title="基本数据结构"></a>基本数据结构</h1><h2 id="ExecutionState"><a href="#ExecutionState" class="headerlink" title="ExecutionState"></a>ExecutionState</h2><p>ExecutionState表示符号执行的状态,状态是符号执行的基本单位。指令的执行使得相应的状态变化，在分支条件下，会根据不同分支fork出不同的状态。</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pc</td>
+<td>KInstIterator</td>
+<td>下一条执行指令的指针</td>
+</tr>
+<tr>
+<td>prevPC</td>
+<td>KInstIterator</td>
+<td>当前执行指令的指针</td>
+</tr>
+<tr>
+<td>stack</td>
+<td>stack_ty</td>
+<td>当前的指令流</td>
+</tr>
+<tr>
+<td>addressSpace</td>
+<td>AddressSpace</td>
+<td>地址空间</td>
+</tr>
+<tr>
+<td>constraints</td>
+<td>ConstraintSet</td>
+<td>执行到当前状态，已经搜集到的约束的集合</td>
+</tr>
+<tr>
+<td>ptreeNode</td>
+<td>PTreeNode*</td>
+<td>符号执行树</td>
+</tr>
+<tr>
+<td>nextID</td>
+<td>uint32_t</td>
+<td>全局状态统计数</td>
+</tr>
+<tr>
+<td>id</td>
+<td>uint32_t</td>
+<td>当前状态id</td>
+</tr>
+</tbody></table>
+<h2 id="AddressSpace"><a href="#AddressSpace" class="headerlink" title="AddressSpace"></a>AddressSpace</h2><p>AddressSpace表示地址空间，地址空间有&lt;MemoryObject,ObjectState&gt;的map结构组成。</p>
+<h2 id="MemoryObject"><a href="#MemoryObject" class="headerlink" title="MemoryObject"></a>MemoryObject</h2><p>MemoryObject表示一个符号内存对象，其成员变量中：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>address</td>
+<td>uint64_t</td>
+<td>为该内存对象的首地址</td>
+</tr>
+<tr>
+<td>size</td>
+<td>unsigned</td>
+<td>为内存对象的大小</td>
+</tr>
+<tr>
+<td>allocSite</td>
+<td>llvm::Value *</td>
+<td>为分配该内存对象的指令。(alloca指令)</td>
+</tr>
+</tbody></table>
+<h2 id="ObjectState"><a href="#ObjectState" class="headerlink" title="ObjectState"></a>ObjectState</h2><p>ObjectState类记录了一个内存对象的状态，包括每个byte对应的状态，已经该内存对象是否只读标识readOnly。</p>
+<h2 id="StackFrame"><a href="#StackFrame" class="headerlink" title="StackFrame"></a>StackFrame</h2><p>表示函数调用栈帧。</p>
 <div id="refer-anchor-1"></div>
 [1] Cadar C , Dunbar D , Engler D R .KLEE: Unassisted and Automatic Generation of High-Coverage Tests for Complex Systems Programs[C]//Usenix Conference on Operating Systems Design & Implementation.USENIX Association, 2009.DOI:10.1109/ROBIO.2013.6739715.
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/31/klee/" data-id="cloggjap7000988tt4wtr6ofl" data-title="符号执行工具KLEE剖析" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/10/31/klee/" data-id="clotmc70r000a3gttd30mcgq8" data-title="符号执行工具KLEE剖析" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -255,302 +546,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/31/hardware-model-checking/" data-id="cloggjap3000788tt2ttv830l" data-title="硬件模型检验" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-data-flow-analysis" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/31/data-flow-analysis/" class="article-date">
-  <time class="dt-published" datetime="2023-10-31T06:30:04.000Z" itemprop="datePublished">2023-10-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/31/data-flow-analysis/">数据流分析</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="数据流分析"><a href="#数据流分析" class="headerlink" title="数据流分析"></a>数据流分析</h1>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/31/data-flow-analysis/" data-id="cloggjap1000688ttbkxe6u2g" data-title="数据流分析" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-symbolic-execution" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/31/symbolic-execution/" class="article-date">
-  <time class="dt-published" datetime="2023-10-31T06:29:09.000Z" itemprop="datePublished">2023-10-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/31/symbolic-execution/">符号执行</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="符号执行"><a href="#符号执行" class="headerlink" title="符号执行"></a>符号执行</h1>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/31/symbolic-execution/" data-id="cloggjap9000a88ttct8x7p82" data-title="符号执行" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-acm" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/31/acm/" class="article-date">
-  <time class="dt-published" datetime="2023-10-31T06:23:18.000Z" itemprop="datePublished">2023-10-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/31/acm/">基础算法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="基础算法"><a href="#基础算法" class="headerlink" title="基础算法"></a>基础算法</h1><p>五个基本的算法思想：分治法、贪心法、动态规划、回溯和分支限界。</p>
-<h2 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h2><h2 id="贪心法"><a href="#贪心法" class="headerlink" title="贪心法"></a>贪心法</h2><h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h2 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h2><h2 id="分支限界"><a href="#分支限界" class="headerlink" title="分支限界"></a>分支限界</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/31/acm/" data-id="cloggjaok000088tt95m0drig" data-title="基础算法" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-cpp-multi-thread" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/31/cpp-multi-thread/" class="article-date">
-  <time class="dt-published" datetime="2023-10-31T05:48:37.000Z" itemprop="datePublished">2023-10-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/31/cpp-multi-thread/">C++多线程</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="线程和进程的区别"><a href="#线程和进程的区别" class="headerlink" title="线程和进程的区别"></a>线程和进程的区别</h2><p>查看操作系统课程。</p>
-<h2 id="C-11中新增加的多线程特性"><a href="#C-11中新增加的多线程特性" class="headerlink" title="C++11中新增加的多线程特性"></a>C++11中新增加的多线程特性</h2><ul>
-<li><p>4种锁</p>
-<ul>
-<li>mutex互斥锁<table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>lock()</td>
-<td>上锁</td>
-</tr>
-<tr>
-<td>unlock()</td>
-<td>解锁</td>
-</tr>
-<tr>
-<td>try_lock()</td>
-<td>非阻塞获取锁</td>
-</tr>
-<tr>
-<td>线程函数调用lock()的时候，有三种情况：</td>
-<td></td>
-</tr>
-</tbody></table>
-<ul>
-<li>锁没有被取走，直接获取锁。</li>
-<li>当前线程已经有该锁了，形成死锁。</li>
-<li>锁被其他线程取走，进行阻塞等待。<br>函数调用try_lock的时候，有以下三种情况：</li>
-<li>锁没有被取走，直接获取锁。</li>
-<li>该线程已经有锁了，产生死锁。</li>
-<li>锁被其他线程取走，会返回false，而不是被阻塞。</li>
-</ul>
-</li>
-<li>recursive_mutex<br>允许递归上锁，来获得互斥对象的多层所有权，在释放互斥量的时候也需要采用等量的unlock来进行解锁。</li>
-<li>time_mutex<br>比mutex多了两个成员函数。<table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>try_lock_for()</td>
-<td>接受一个时间范围，表示在一段时间范围之内，线程如果没有获得锁则被阻塞住，如果此期间其他线程释放了锁，则该线程可以获得锁，如果超时，返回false</td>
-</tr>
-<tr>
-<td>try_lock_util()</td>
-<td>接受一个时间点作为参数，在指定时间未到来之前，线程如果没有获得锁则被阻塞住，如果此期间其他线程释放了锁，则该线程可以获得锁，如果超时返回false</td>
-</tr>
-</tbody></table>
-</li>
-<li>recurive_timed_mutex<br>较少使用。</li>
-</ul>
-</li>
-<li><p>lock_guard<br>lock_guard是C++11中定义的模板类。主要通过RAII的方式，对其管理的互斥量进行了封装，在需要加锁的地方，只需要用上述介绍的任意互斥体实例化一个lock_guard，调用构造函数成功上锁，出作用域前，lock_guard对象要被销毁，调用析构函数自动解锁，可以有效避免死锁的问题。缺陷：太单一，用户没有办法对锁进行控制，因此C++11又提供了unique_lock。</p>
-</li>
-<li><p>unique_lock<br>与lock_gard类似，unique_lock类模板也是采用RAII的方式对锁进行了封装，并且也是独占所有权的方式管理mutex对象的上锁和解锁操作，即其对象之间不能发生拷贝。在构造时，unique_lock对象需要传入一个Mutex对象作为它的参数，新创建的unique_lock对象负责传入的Mutex对象的上锁和解锁的操作。使用以上类型互斥量实例化unique_lock对象的时候，自动调用构造函数上锁，unique_lock对象销毁时自动调用析构函数解锁，可以方便的防止死锁问题。与lock_guard不同的是，unique_lock更加的灵活，提供了很多成员函数。</p>
-</li>
-</ul>
-<h2 id="锁和同步机制"><a href="#锁和同步机制" class="headerlink" title="锁和同步机制"></a>锁和同步机制</h2><h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><h2 id="并行算法和数据结构"><a href="#并行算法和数据结构" class="headerlink" title="并行算法和数据结构"></a>并行算法和数据结构</h2><h2 id="OpenMP-MPI"><a href="#OpenMP-MPI" class="headerlink" title="OpenMP&#x2F;MPI"></a>OpenMP&#x2F;MPI</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/31/cpp-multi-thread/" data-id="cloggjaoy000488tt2cyy0uvd" data-title="C++多线程" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-cpp11-feature" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/10/31/cpp11-feature/" class="article-date">
-  <time class="dt-published" datetime="2023-10-31T05:48:37.000Z" itemprop="datePublished">2023-10-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/10/31/cpp11-feature/">C++11新特性</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><img src="/2023/10/31/cpp11-feature/cpp11-feature.png" alt="avatar"></p>
-<!-- graph LR
-N0["C++11新特性"]
-N1_1["并发支持"]
-N1_2["泛型编程"]
-N1_3["简化使用"]
-N1_4["内存模型"]
-N1_5["线程与锁"]
-N1_6["期值"]
-N1_7["lambda"]
-N1_8["变参模板"]
-N1_9["tuple"]
-N1_10["别名"]
-N1_11["auto和decltype"]
-N1_12["范围for"]
-N1_13["移动语义"]
-N1_14["资源管理指针"]
-N1_15["其他"]
-N2_1["统一初始化"]
-N2_2["nullptr"]
-N2_3["constexpr"]
-N0---N1_1
-N0---N1_2
-N0---N1_3
-N0---N1_4
-N0---N1_5
-N0---N1_6
-N0---N1_7
-N0---N1_8
-N0---N1_9
-N0---N1_10
-N0---N1_11
-N0---N1_12
-N0---N1_13
-N0---N1_14
-N0---N1_15
-N1_15---N2_1
-N1_15---N2_2
-N1_15---N2_3
--->
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/31/cpp11-feature/" data-id="cloggjap0000588tt9xudfndg" data-title="C++11新特性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/10/31/hardware-model-checking/" data-id="clotmc70s000c3gtt0pzib2kx" data-title="硬件模型检验" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -585,7 +581,7 @@ N1_15---N2_3
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a></li></ul>
     </div>
   </div>
 
@@ -598,23 +594,23 @@ N1_15---N2_3
       <ul>
         
           <li>
-            <a href="/2023/10/31/eco/">eco</a>
+            <a href="/2023/11/05/cpp-basic/">C++基础知识</a>
           </li>
         
           <li>
-            <a href="/2023/10/31/design-pattern/">设计模式</a>
+            <a href="/2023/11/05/graph-isomorphism/">图同构算法</a>
           </li>
         
           <li>
-            <a href="/2023/10/31/coq/">coq</a>
+            <a href="/2023/11/05/kmp/">kmp</a>
           </li>
         
           <li>
-            <a href="/2023/10/31/klee/">符号执行工具KLEE剖析</a>
+            <a href="/2023/11/04/A-Memory-Model-for-Static-Analysis-of-C/">A Memory Model for Static Analysis of C</a>
           </li>
         
           <li>
-            <a href="/2023/10/31/hardware-model-checking/">硬件模型检验</a>
+            <a href="/2023/11/02/leetcode/">leetcode题解</a>
           </li>
         
       </ul>

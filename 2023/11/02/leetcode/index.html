@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>数据流分析 | Hexo</title>
+  <title>leetcode题解 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="数据流分析">
+  <meta name="description" content="滑动窗口解题适用情形滑动窗口的核心在于连续！如果需要得到的结果是满足某种较为明显条件的连续的子数组，可以考虑使用滑动窗口来做。滑动窗口算法是较为入门题目的经典算法之一，一般是一些有规律数组问题的最优解，如果一个数组的问题可以用动态规划解，但又可以使用滑动窗口解决，那么往往滑动窗口的效率更高。 基本步骤 初始化窗口初始化左右边界left&#x3D;right&#x3D;0,把索引闭区间[left,r">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据流分析">
-<meta property="og:url" content="http://example.com/2023/10/31/data-flow-analysis/index.html">
+<meta property="og:title" content="leetcode题解">
+<meta property="og:url" content="http://example.com/2023/11/02/leetcode/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="数据流分析">
+<meta property="og:description" content="滑动窗口解题适用情形滑动窗口的核心在于连续！如果需要得到的结果是满足某种较为明显条件的连续的子数组，可以考虑使用滑动窗口来做。滑动窗口算法是较为入门题目的经典算法之一，一般是一些有规律数组问题的最优解，如果一个数组的问题可以用动态规划解，但又可以使用滑动窗口解决，那么往往滑动窗口的效率更高。 基本步骤 初始化窗口初始化左右边界left&#x3D;right&#x3D;0,把索引闭区间[left,r">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-10-31T06:30:04.000Z">
-<meta property="article:modified_time" content="2023-10-31T06:30:24.630Z">
+<meta property="article:published_time" content="2023-11-02T11:01:45.000Z">
+<meta property="article:modified_time" content="2023-11-02T13:05:52.629Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -75,10 +75,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-data-flow-analysis" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-leetcode" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/10/31/data-flow-analysis/" class="article-date">
-  <time class="dt-published" datetime="2023-10-31T06:30:04.000Z" itemprop="datePublished">2023-10-31</time>
+    <a href="/2023/11/02/leetcode/" class="article-date">
+  <time class="dt-published" datetime="2023-11-02T11:01:45.000Z" itemprop="datePublished">2023-11-02</time>
 </a>
     
   </div>
@@ -89,7 +89,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      数据流分析
+      leetcode题解
     </h1>
   
 
@@ -97,11 +97,18 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="数据流分析"><a href="#数据流分析" class="headerlink" title="数据流分析"></a>数据流分析</h1>
+        <h1 id="滑动窗口解题"><a href="#滑动窗口解题" class="headerlink" title="滑动窗口解题"></a>滑动窗口解题</h1><h2 id="适用情形"><a href="#适用情形" class="headerlink" title="适用情形"></a>适用情形</h2><p>滑动窗口的核心在于连续！如果需要得到的结果是满足某种较为明显条件的连续的子数组，可以考虑使用滑动窗口来做。滑动窗口算法是较为入门题目的经典算法之一，一般是一些有规律数组问题的最优解，如果一个数组的问题可以用动态规划解，但又可以使用滑动窗口解决，那么往往滑动窗口的效率更高。</p>
+<h2 id="基本步骤"><a href="#基本步骤" class="headerlink" title="基本步骤"></a>基本步骤</h2><ul>
+<li>初始化窗口<br>初始化左右边界left&#x3D;right&#x3D;0,把索引闭区间[left,right]称为一个窗口。</li>
+<li>寻找可行解<br>先不断的增加right指针扩大窗口[left,right],直到窗口中的满足可行解。</li>
+<li>优化可行解<br>当得到可行解后，停止增加right,转而不断增加left指针缩小[left,right],直到窗口中的可行解不再符合要求。同时，每次增加left，都要更新一轮结果。</li>
+<li>滑动窗口，直至一次遍历结束。<br>重复第2和第3步，直到right到达的尽头。</li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/31/data-flow-analysis/" data-id="clotmc70o00053gtt6ffraiub" data-title="数据流分析" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/11/02/leetcode/" data-id="clotmc70v000e3gtt7dc329lg" data-title="leetcode题解" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -111,19 +118,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2023/10/31/hardware-model-checking/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2023/11/04/A-Memory-Model-for-Static-Analysis-of-C/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          硬件模型检验
+          A Memory Model for Static Analysis of C
         
       </div>
     </a>
   
   
-    <a href="/2023/10/31/symbolic-execution/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2023/10/31/eco/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">符号执行</div>
+      <div class="article-nav-title">eco</div>
     </a>
   
 </nav>
